@@ -1,10 +1,9 @@
 """This module defines the Client class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.0.0"
+__version__= "1.1.1"
 
-from email_validator.exceptions_types import EmailNotValidError
-from email_validator.validate_email import validate_email
+from email_validator import validate_email, EmailNotValidError
 
 class Client:
     
@@ -24,11 +23,15 @@ class Client:
             raise ValueError("Last name cannot be blank.")
         
         try: 
-            validate_email(email_address)
+            validated_email = validate_email(email_address, 
+                                             check_deliverability = False)
+            
+            email_address = validated_email 
 
         except EmailNotValidError:
             email_address = "email@pixell-river.com"
 
+        
         
 
         
