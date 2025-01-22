@@ -4,7 +4,7 @@ the BankAccount and Client classes.
 """
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = "Xavier Balzer"
 
 from bank_account.bank_account import BankAccount
 from client.client import Client
@@ -23,16 +23,17 @@ def main():
 
 
 
-    # 2. Declare a BankAccount object with an initial value of None.
+    # 2. Declare a variable that could store a BankAccount instance.
+    # Define the variable with an initial value of None.
 
- 
 
-    # 3. Using the bank_account object declared in step 2, code a statement 
-    # to instantiate the BankAccount object.
+
+    # 3. Using the the variable declared in step 2, code a statement
+    # to instantiate a BankAccount object.
     # Use any integer value for the BankAccount number.
-    # Use the client_number used to create the Client object in step 1 for the 
-    # BankAccount's client_number. 
-    # Use a floating point value for the balance. 
+    # Use the client number used to create the Client object in step 1 for the
+    # BankAccount's client number.
+    # Use a floating point value for the balance.
     
 
 
