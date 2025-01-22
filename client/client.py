@@ -1,7 +1,7 @@
 """This module defines the Client class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.1.1"
+__version__= "1.2.1"
 
 from email_validator import validate_email, EmailNotValidError
 
@@ -30,8 +30,20 @@ class Client:
 
         except EmailNotValidError:
             email_address = "email@pixell-river.com"
-
-        
-        
-
+                
+    @property
+    def client_number(self) -> int:
+        return self.__client_number
+    
+    @property
+    def first_name(self) -> str:
+        return self.__first_name
+    
+    @property
+    def last_name(self) -> str:
+        return self.__last_name
+    
+    @property
+    def email_address(self) -> str:
+        return self.__email_address
         

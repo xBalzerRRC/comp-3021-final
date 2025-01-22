@@ -12,4 +12,4 @@ Assignment #1 - Classes: This assignment will produce some foundational classes 
 
 ## Encapsulation
 
-[use this section to explain how Encapsulation was achieved in the BankAccount class.]
+use this section to explain how Encapsulation was achieved in the BankAccount class.
