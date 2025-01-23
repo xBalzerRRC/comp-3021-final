@@ -47,3 +47,13 @@ class Client:
     def email_address(self) -> str:
         return self.__email_address
         
+    def __str__(self) -> str:
+
+        string_representation = ( 
+            f"{self.last_name}, "
+            f"{self.first_name} "
+            f"[{self.client_number}] - "
+            f"{self.email_address}\n"
+        )
+
+        return string_representation
