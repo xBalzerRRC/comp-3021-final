@@ -1,7 +1,7 @@
 """This module defines the Client class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.3.2"
+__version__= "1.3.3"
 
 from email_validator import validate_email, EmailNotValidError
 
@@ -43,7 +43,7 @@ class Client:
         try: 
             validated_email = validate_email(email_address, 
                                              check_deliverability = False)
-            email_address = validated_email
+            email_address = validated_email.normalized
 
         except EmailNotValidError:
             email_address = "email@pixell-river.com"
