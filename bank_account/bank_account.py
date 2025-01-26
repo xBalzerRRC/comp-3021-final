@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.1.0"
+__version__= "1.2.0"
 
 class BankAccount:
     """Represents a bank account within a banking system."""
@@ -37,3 +37,33 @@ class BankAccount:
         self.__account_number = account_number
         self.__client_number = client_number
         self.__balance = balance
+
+    @property
+    def account_number(self) -> int:
+        """Gets the bank account number.
+        
+        Returns:
+            int: The bank account number.
+        """
+
+        return self.__account_number
+    
+    @property
+    def client_number(self) -> int:
+        """Gets the client number.
+        
+        Returns:
+            int: The client number.
+        """
+
+        return self.__client_number
+    
+    @property
+    def balance(self) -> float:
+        """Gets the balance of the bank account.
+        
+        Returns:
+            float: The balance of the bank account.
+        """
+
+        return self.__balance
