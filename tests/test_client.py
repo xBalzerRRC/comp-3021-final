@@ -5,7 +5,7 @@ Example:
 """
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 import unittest
 from client.client import Client
@@ -91,4 +91,43 @@ class TestClient(unittest.TestCase):
         actual = self.client._Client__email_address
         self.assertEqual(expected, actual)
 
-    
+    def test_client_number_accessor_returns_correct_state(self):
+        # Act
+        actual = self.client.client_number
+
+        # Assert
+        expected = 1234
+        self.assertEqual(expected, actual)
+
+    def test_first_name_accessor_returns_correct_state(self):
+        # Act
+        actual = self.client.first_name
+
+        # Assert
+        expected = "Xavier"
+        self.assertEqual(expected, actual)   
+
+    def test_last_name_accessor_returns_correct_state(self):
+        # Act
+        actual = self.client.last_name
+
+        # Assert
+        expected = "Balzer"
+        self.assertEqual(expected, actual)   
+
+    def test_email_address_accessor_returns_correct_state(self):
+        # Act
+        actual = self.client.email_address
+
+        # Assert
+        expected = "xbalzer@rrc.ca"
+        self.assertEqual(expected, actual)
+
+    def test_str_returns_string_representation(self):
+        # Act
+        actual = self.client.__str__()        
+
+        # Assert
+        expected = f"Balzer, Xavier [1234] - xbalzer@rrc.ca\n"
+        self.assertEqual(expected, actual)
+   
