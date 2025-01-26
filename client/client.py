@@ -1,7 +1,7 @@
 """This module defines the Client class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.3.1"
+__version__= "1.3.2"
 
 from email_validator import validate_email, EmailNotValidError
 
@@ -23,8 +23,9 @@ class Client:
             ValueError: Raised when the client_number argument value is
                 not an integer type, or when the first_name or last_name 
                 argument values contain no non-whitespace characters.
-            EmailNotValidError: Raised when an invalid email_address 
-                argument value is evaluated.
+            EmailNotValidError: Raised when the email_address arguement
+                value fails to pass any check imposed by the 
+                validate_email method.
         """
 
         first_name = first_name.strip()
@@ -43,6 +44,7 @@ class Client:
             validated_email = validate_email(email_address, 
                                              check_deliverability = False)
             email_address = validated_email
+
         except EmailNotValidError:
             email_address = "email@pixell-river.com"
 
@@ -92,10 +94,10 @@ class Client:
         return self.__email_address
         
     def __str__(self) -> str:
-        """Returns the string representation of the object.
+        """Returns a string representation of the Client object.
 
         Returns:
-            str: The string representation of the object.
+            str: A string representation of the Client object.
         """
 
         string_representation = ( 
