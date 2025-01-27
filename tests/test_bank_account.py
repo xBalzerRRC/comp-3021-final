@@ -5,7 +5,7 @@ Example:
 """
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 import unittest
 from bank_account.bank_account import BankAccount
@@ -92,4 +92,47 @@ class TestBankAccount(unittest.TestCase):
 
         # Assert
         expected = 1000.0
-        self.assertEqual(expected, actual)   
+        self.assertEqual(expected, actual)
+
+    def test_update_balance_updates_correct_when_amount_positive(self):
+        # Arrange
+        account_number = 1234
+        client_number = 1
+        balance = 1000.0
+        amount = 10.0
+
+        # Act
+        self.bankaccount = BankAccount(account_number, client_number, balance)
+        self.bankaccount.update_balance(amount)
+        # Assert 
+        expected = 1010.00
+        actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
+
+    def test_update_balance_updates_correct_when_amount_negative(self):
+        account_number = 1234
+        client_number = 1
+        balance = 1000.0
+        amount = -10.0
+
+        # Act
+        self.bankaccount = BankAccount(account_number, client_number, balance)
+        self.bankaccount.update_balance(amount)
+        # Assert 
+        expected = 990.00
+        actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
+
+    def test_update_balance_unchanged_when_amount_invalid(self):
+        account_number = 1234
+        client_number = 1
+        balance = 1000.0
+        amount = "10"
+
+        # Act
+        self.bankaccount = BankAccount(account_number, client_number, balance)
+        self.bankaccount.update_balance(amount)
+        # Assert 
+        expected = 1000.00
+        actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
