@@ -5,7 +5,7 @@ Example:
 """
 
 __author__ = "Xavier Balzer"
-__version__ = "1.2.0"
+__version__ = "1.4.0"
 
 import unittest
 from bank_account.bank_account import BankAccount
@@ -187,4 +187,12 @@ class TestBankAccount(unittest.TestCase):
         # Assert 
         expected = "Withdrawal amount: $2,000.00 must not exceed the account balance: $1,000.00."
         actual = str(context.exception)
+        self.assertEqual(expected, actual)
+
+    def test_str_returns_string_representation(self):
+        # Act
+        actual = self.bankaccount.__str__()        
+
+        # Assert
+        expected = f"Account Number: 1234 Balance: $1,000.00\n"
         self.assertEqual(expected, actual)
