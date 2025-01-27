@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.3.0"
+__version__= "1.3.1"
 
 class BankAccount:
     """Represents a bank account within a banking system."""
@@ -76,19 +76,9 @@ class BankAccount:
         Args:
             amount(float): Amount of currency received.
         """
-
-        # I don't know how to verify that the amount can convert 
-        # to a float without using a try-except block, and as this
-        # method does not return any exceptions, so I can only think to
-        # use pass if a ValueError is caught. If I was told to verify
-        # this in the deposit or withdraw methods, I would not use it.
-
-        try:
-            amount = float(amount)
+        
+        if isinstance(amount, float):
             self.__balance += amount
-
-        except ValueError:
-            pass
 
     def deposit(self, amount: float):
         """Passes the amount attribute value to the update_balance
@@ -127,12 +117,10 @@ class BankAccount:
             raise ValueError(f"Withdrawal amount: {amount} must be numeric.")
         
         elif amount < 0:
-            raise ValueError(f"Withdrawal amount: {amount:,.2f} 
-                             must be positive.")
+            raise ValueError(f"Withdrawal amount: {amount:,.2f} must be positive.")
         
         elif amount > self.__balance:
-            raise ValueError(f"Withdrawal amount: {amount:,.2f} must not exceed 
-                             the account balance: {self.__balance:,.2f}")
+            raise ValueError(f"Withdrawal amount: {amount:,.2f} must not exceed the account balance: {self.__balance:,.2f}")
         else:
             amount = -abs(amount)
             self.update_balance(amount)
