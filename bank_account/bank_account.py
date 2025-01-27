@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.3.1"
+__version__= "1.3.2"
 
 class BankAccount:
     """Represents a bank account within a banking system."""
@@ -76,7 +76,7 @@ class BankAccount:
         Args:
             amount(float): Amount of currency received.
         """
-        
+
         if isinstance(amount, float):
             self.__balance += amount
 
@@ -120,7 +120,7 @@ class BankAccount:
             raise ValueError(f"Withdrawal amount: {amount:,.2f} must be positive.")
         
         elif amount > self.__balance:
-            raise ValueError(f"Withdrawal amount: {amount:,.2f} must not exceed the account balance: {self.__balance:,.2f}")
+            raise ValueError(f"Withdrawal amount: ${amount:,.2f} must not exceed the account balance: ${self.__balance:,.2f}.")
         else:
             amount = -abs(amount)
             self.update_balance(amount)
