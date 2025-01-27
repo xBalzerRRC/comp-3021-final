@@ -12,4 +12,4 @@ Assignment #1 - Classes: This assignment will produce some foundational classes 
 
 ## Encapsulation
 
-use this section to explain how Encapsulation was achieved in the BankAccount class.
+By making use of accessors and mutators for the BankAccount class' attributes, we are able to read and assign values to private attributes without needing direct access to them. For instance, methods such as update_balance, withdraw, and deposit enable us to make changes to the balance class attribute without needing to modify the variable directly.
