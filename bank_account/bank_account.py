@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.2.0"
+__version__= "1.3.0"
 
 class BankAccount:
     """Represents a bank account within a banking system."""
@@ -22,6 +22,7 @@ class BankAccount:
                 argument values are not an integer type, or when the
                 balance argument value cannot be converted to a float.
         """
+
         if not isinstance(account_number, int):
             raise ValueError("Account number must be numeric.")
         
@@ -67,3 +68,88 @@ class BankAccount:
         """
 
         return self.__balance
+    
+    def update_balance(self, amount: float):
+        """Updates the balance if the amount attribute value can be
+        successfully converted to a float.
+
+        Args:
+            amount(float): Amount of currency received.
+        """
+
+        # I don't know how to verify that the amount can convert 
+        # to a float without using a try-except block, and as this
+        # method does not return any exceptions, so I can only think to
+        # use pass if a ValueError is caught. If I was told to verify
+        # this in the deposit or withdraw methods, I would not use it.
+
+        try:
+            amount = float(amount)
+            self.__balance += amount
+
+        except ValueError:
+            pass
+
+    def deposit(self, amount: float):
+        """Passes the amount attribute value to the update_balance
+            method.
+        
+        Args:
+            amount(float): Amount of currency received.
+
+        Raises:
+            ValueError: Raised when amount received is non-numeric
+                or not positive.
+        """
+
+        if not isinstance(amount, float):
+            raise ValueError(f"Deposit amount: {amount} must be numeric.")
+        
+        elif amount < 0:
+            raise ValueError(f"Deposit amount: {amount:,.2f} must be positive.")
+        
+        else: 
+            self.update_balance(amount)
+
+    def withdraw(self, amount: float):
+        """Passes negative amount attribute value
+            to the update_balance method.
+        
+        Args:
+            amount(float): Amount of currency received.
+
+        Raises:
+            ValueError: Raised when amount received is non-numeric, 
+                not positive, or larger than the account balance. 
+        """
+
+        if not isinstance(amount, float):
+            raise ValueError(f"Withdrawal amount: {amount} must be numeric.")
+        
+        elif amount < 0:
+            raise ValueError(f"Withdrawal amount: {amount:,.2f} 
+                             must be positive.")
+        
+        elif amount > self.__balance:
+            raise ValueError(f"Withdrawal amount: {amount:,.2f} must not exceed 
+                             the account balance: {self.__balance:,.2f}")
+        else:
+            amount = -abs(amount)
+            self.update_balance(amount)
+
+    def __str__(self) -> str:
+        """Returns a string representation of the BankAccount object's
+            balance and account number attributes.
+
+        Returns:
+            str: A string representation of the BankAccount object's 
+            balance and account number attributes.
+        """
+
+        string_representation = ( 
+            f"Account Number: {self.account_number} "
+            f"Balance: ${self.balance:,.2f}\n"
+        )
+
+        return string_representation
+
