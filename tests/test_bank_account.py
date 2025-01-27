@@ -5,7 +5,7 @@ Example:
 """
 
 __author__ = "Xavier Balzer"
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 
 import unittest
 from bank_account.bank_account import BankAccount
@@ -177,7 +177,7 @@ class TestBankAccount(unittest.TestCase):
         actual = str(context.exception)
         self.assertEqual(expected, actual)
 
-    def test_withdraw_negative_amount_raises_value_error(self):
+    def test_withdraw_excessive_amount_raises_value_error(self):
         # Arrange
         amount = 2000.0
 
