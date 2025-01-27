@@ -110,13 +110,10 @@ class TestBankAccount(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_update_balance_updates_correct_when_amount_negative(self):
-        account_number = 1234
-        client_number = 1
-        balance = 1000.0
+        # Arrange
         amount = -10.0
 
         # Act
-        self.bankaccount = BankAccount(account_number, client_number, balance)
         self.bankaccount.update_balance(amount)
         # Assert 
         expected = 990.00
@@ -124,15 +121,70 @@ class TestBankAccount(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_update_balance_unchanged_when_amount_invalid(self):
-        account_number = 1234
-        client_number = 1
-        balance = 1000.0
+        # Arrange
         amount = "10"
 
         # Act
-        self.bankaccount = BankAccount(account_number, client_number, balance)
         self.bankaccount.update_balance(amount)
         # Assert 
         expected = 1000.00
         actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
+
+    def test_deposit_updates_balance_correctly_when_valid_amount(self):
+        # Arrange
+        amount = 10.0
+
+        # Act
+        self.bankaccount.deposit(amount)
+        # Assert 
+        expected = 1010.00
+        actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
+
+    def test_deposit_negative_amount_raises_value_error(self):
+        # Arrange
+        amount = -10.0
+
+        # Act
+        with self.assertRaises(ValueError) as context:
+            self.bankaccount.deposit(amount)
+        # Assert 
+        expected = "Deposit amount: -10.00 must be positive."
+        actual = str(context.exception)
+        self.assertEqual(expected, actual)
+
+    def test_withdraw_updates_balance_correctly_when_valid_amount(self):
+        # Arrange
+        amount = 10.0
+
+        # Act
+        self.bankaccount.withdraw(amount)
+        # Assert 
+        expected = 990.00
+        actual = self.bankaccount._BankAccount__balance
+        self.assertEqual(expected, actual)
+
+    def test_withdraw_negative_amount_raises_value_error(self):
+        # Arrange
+        amount = -10.0
+
+        # Act
+        with self.assertRaises(ValueError) as context:
+            self.bankaccount.withdraw(amount)
+        # Assert 
+        expected = "Withdrawal amount: -10.00 must be positive."
+        actual = str(context.exception)
+        self.assertEqual(expected, actual)
+
+    def test_withdraw_negative_amount_raises_value_error(self):
+        # Arrange
+        amount = 2000.0
+
+        # Act
+        with self.assertRaises(ValueError) as context:
+            self.bankaccount.withdraw(amount)
+        # Assert 
+        expected = "Withdrawal amount: $2,000.00 must not exceed the account balance: $1,000.00."
+        actual = str(context.exception)
         self.assertEqual(expected, actual)
