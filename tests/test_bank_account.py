@@ -70,5 +70,26 @@ class TestBankAccount(unittest.TestCase):
         actual = str(context.exception)
         self.assertEqual(expected, actual)
 
-    
-        
+    def test_account_number_accessor_returns_correct_state(self):
+        # Act
+        actual = self.bankaccount._BankAccount__account_number
+
+        # Assert
+        expected = 1234
+        self.assertEqual(expected, actual)
+
+    def test_client_number_accessor_returns_correct_state(self):
+        # Act
+        actual = self.bankaccount._BankAccount__client_number
+
+        # Assert
+        expected = 1
+        self.assertEqual(expected, actual)
+
+    def test_balance_accessor_returns_correct_state(self):
+        # Act
+        actual = self.bankaccount._BankAccount__balance
+
+        # Assert
+        expected = 1000.0
+        self.assertEqual(expected, actual)   
