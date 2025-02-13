@@ -23,9 +23,8 @@ class Client:
             ValueError: Raised when the client_number argument value is
                 not an integer type, or when the first_name or last_name 
                 argument values contain no non-whitespace characters.
-            EmailNotValidError: Raised when the email_address arguement
-                value fails to pass any check imposed by the 
-                validate_email method.
+            EmailNotValidError: Raised when an invalid email_address
+                argument is evaluated by the validate_email method.
         """
 
         first_name = first_name.strip()

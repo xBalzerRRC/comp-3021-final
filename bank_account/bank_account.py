@@ -70,8 +70,7 @@ class BankAccount:
         return self.__balance
     
     def update_balance(self, amount: float):
-        """Updates the balance if the amount attribute value can be
-        successfully converted to a float.
+        """Updates balance with amount received.
 
         Args:
             amount(float): Amount of currency received.
@@ -81,8 +80,7 @@ class BankAccount:
             self.__balance += amount
 
     def deposit(self, amount: float):
-        """Passes the amount attribute value to the update_balance
-            method.
+        """Deposits amount to balance.
         
         Args:
             amount(float): Amount of currency received.
@@ -98,12 +96,10 @@ class BankAccount:
         elif amount < 0:
             raise ValueError(f"Deposit amount: {amount:,.2f} must be positive.")
         
-        else: 
-            self.update_balance(amount)
+        self.update_balance(amount)
 
     def withdraw(self, amount: float):
-        """Passes negative amount attribute value
-            to the update_balance method.
+        """Withdraws amount from balance.
         
         Args:
             amount(float): Amount of currency received.
@@ -120,10 +116,11 @@ class BankAccount:
             raise ValueError(f"Withdrawal amount: {amount:,.2f} must be positive.")
         
         elif amount > self.__balance:
-            raise ValueError(f"Withdrawal amount: ${amount:,.2f} must not exceed the account balance: ${self.__balance:,.2f}.")
-        else:
-            amount = -abs(amount)
-            self.update_balance(amount)
+            raise ValueError(f"Withdrawal amount: ${amount:,.2f} " 
+                             f"must not exceed the account balance: ${self.__balance:,.2f}.")
+        
+        amount = -abs(amount)
+        self.update_balance(amount)
 
     def __str__(self) -> str:
         """Returns a string representation of the BankAccount object's
