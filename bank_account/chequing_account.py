@@ -1,7 +1,7 @@
 """This module defines the ChequingAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 from bank_account.bank_account import BankAccount
 from datetime import date
@@ -31,7 +31,8 @@ class ChequingAccount(BankAccount):
         Raises:
             ValueError: Raised when the account_number or client_number
                 argument values are not an integer type, or when the
-                balance argument value cannot be converted to a float.
+                balance, overdraft_limit, or overdraft_rate argument 
+                values cannot be converted to a float.
         """
         
         super().__init__(account_number, client_number, balance,
@@ -52,3 +53,16 @@ class ChequingAccount(BankAccount):
         # Private attributes
         self.__overdraft_limit = overdraft_limit
         self.__overdraft_rate = overdraft_rate
+
+    def __str__(self) -> str:
+        """Returns the "informal" or nicely printable string 
+        representation of the object.
+
+        Returns:
+            str: The "informal" or nicely printable string 
+                representation of the object.
+        """
+        
+        return super().__str__() + (f"\nOverdraft Limit: "
+            f"${self.overdraft_limit:,.2f} Overdraft Rate: "
+            f"{self.overdraft_rate:.2%} Account Type: Chequing")
