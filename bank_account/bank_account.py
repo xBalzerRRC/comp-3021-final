@@ -33,12 +33,15 @@ class BankAccount:
         if not isinstance(client_number, int):
             raise ValueError("Client number must be numeric.")
 
+        if not isinstance(date_created, date):
+            date_created = date.today()    
+
         try:
             balance = float(balance)
 
         except ValueError:
             balance = 0.0
-        
+
         # Constant attributes
         self.BASE_SERVICE_CHARGE = 0.50
 
