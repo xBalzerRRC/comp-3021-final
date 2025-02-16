@@ -1,15 +1,14 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.4.3"
+__version__= "1.4.4"
 
 from abc import ABC, abstractmethod
-from datetime import date
+from datetime import datetime, date
 
 class BankAccount(ABC):
     """Represents a bank account within a banking system."""
 
-    @abstractmethod
     def __init__(self, BASE_SERVICE_CHARGE: float, account_number: int,
                  client_number: int, balance: float, date_created: date):
         """Initializes a new instance of the BankAccount class.
@@ -37,7 +36,7 @@ class BankAccount(ABC):
             raise ValueError("Client number must be numeric.")
 
         if not isinstance(date_created, date):
-            date_created = date.today()    
+            date_created = date.today()
 
         try:
             balance = float(balance)

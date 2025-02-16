@@ -3,14 +3,15 @@
 __author__ = "Xavier Balzer"
 __version__ = "1.4.0"
 
-from bank_account.bank_account import BankAccount
 from datetime import date
+from bank_account.bank_account import BankAccount
 
 class ChequingAccount(BankAccount):
     """Represents a chequing account within a banking system."""
 
     def __init__(self, account_number: int, client_number: int, balance: float,
-                 date_created: date, overdraft_limit: float, overdraft_rate: float):
+                 date_created: date, overdraft_limit: float,
+                 overdraft_rate: float):
         """Initializes a new instance of the ChequingAccount class.
 
         Args:
@@ -34,9 +35,8 @@ class ChequingAccount(BankAccount):
                 balance, overdraft_limit, or overdraft_rate argument 
                 values cannot be converted to a float.
         """
-        
-        super().__init__(account_number, client_number, balance,
-                 date_created)
+        super().__init__(0.50, account_number, client_number, balance, 
+                         date_created)
         
         try:
             overdraft_limit = float(overdraft_limit)
