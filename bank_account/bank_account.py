@@ -1,14 +1,17 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.3.2"
+__version__= "1.4.2"
 
+from abc import ABC, abstractmethod
 from datetime import date
 
-class BankAccount:
+class BankAccount(ABC):
     """Represents a bank account within a banking system."""
 
-    def __init__(self, BASE_SERVICE_CHARGE: float, account_number: int, client_number: int, balance: float, date_created: date):
+    @abstractmethod
+    def __init__(self, BASE_SERVICE_CHARGE: float, account_number: int,
+                 client_number: int, balance: float, date_created: date):
         """Initializes a new instance of the BankAccount class.
 
         Args:
@@ -152,5 +155,12 @@ class BankAccount:
 
         return string_representation
 
+    @abstractmethod
     def get_service_charges(self) -> float:
+        """Abstract get_service_charges method. Implemented in 
+            sub-classes.
+
+        Returns:
+            float:  Calculated service charges.
+        """      
         pass
