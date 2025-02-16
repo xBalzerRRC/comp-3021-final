@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.4.2"
+__version__= "1.4.3"
 
 from abc import ABC, abstractmethod
 from datetime import date
@@ -150,15 +150,15 @@ class BankAccount(ABC):
 
         string_representation = ( 
             f"Account Number: {self.account_number} "
-            f"Balance: ${self.balance:,.2f}\n"
+            f"Balance: ${self.balance:,.2f}"
         )
 
         return string_representation
 
     @abstractmethod
     def get_service_charges(self) -> float:
-        """Abstract get_service_charges method. Implemented in 
-            sub-classes.
+        """Returns the calculated service charges a BankAccount will 
+            incur.
 
         Returns:
             float:  Calculated service charges.

@@ -1,7 +1,7 @@
 """This module defines the ChequingAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.2.0"
+__version__ = "1.4.0"
 
 from bank_account.bank_account import BankAccount
 from datetime import date
@@ -64,5 +64,27 @@ class ChequingAccount(BankAccount):
         """
         
         return super().__str__() + (f"\nOverdraft Limit: "
-            f"${self.overdraft_limit:,.2f} Overdraft Rate: "
-            f"{self.overdraft_rate:.2%} Account Type: Chequing")
+            f"${self.__overdraft_limit:,.2f} Overdraft Rate: "
+            f"{self.__overdraft_rate:.2%} Account Type: Chequing")
+    
+    def get_service_charges(self) -> float:
+        """Returns the calculated service charges a BankAccount will 
+            incur.
+
+        Returns:
+            float:  Calculated service charges.
+        """      
+
+        if self.__balance >= self.__overdraft_limit:
+            service_charges = self.BASE_SERVICE_CHARGE
+        
+        else:
+            service_charges = (
+                self.BASE_SERVICE_CHARGE + 
+                (self.__overdraft_limit - self.__balance) * 
+                self.__overdraft_rate)
+        
+        return service_charges
+
+            
+
