@@ -152,3 +152,5 @@ class BankAccount:
 
         return string_representation
 
+    def get_service_charges(self) -> float:
+        pass
