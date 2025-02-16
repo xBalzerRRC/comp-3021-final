@@ -1,7 +1,7 @@
 """This module defines the InvestmentAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 from datetime import date, timedelta
 from bank_account.bank_account import BankAccount
@@ -32,11 +32,49 @@ class InvestmentAccount(BankAccount):
                 balance argument value cannot be converted to a float.
         """
 
-        super().__init__(account_number, client_number, balance, 
+        super().__init__(0.5, account_number, client_number, balance, 
                          date_created)
+        
+        try:
+            management_fee = float(management_fee)
+
+        except ValueError:
+            management_fee = 2.55
         
         self.TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
 
-        self.__management_fee - management_fee
+        self.__management_fee = management_fee
 
+    def __str__(self) -> str:
+        """Returns the "informal" or nicely printable string 
+        representation of the object.
+
+        Returns:
+            str: The "informal" or nicely printable string 
+                representation of the object.
+        """
+        if self._date_created <= self.TEN_YEARS_AGO:
+            return super().__str__() + (f"\nDate Created: {self._date_created} 
+                                        Management Fee: ${self.__management_fee:,.2f} 
+                                        Account Type: Investment")
+        else:
+            return super().__str__() + (f"\nDate Created: {self._date_created} 
+                                        Management Fee: Waived 
+                                        Account Type: Investment")
+        
+    def get_service_charges(self) -> float:
+        """Returns the calculated service charges a BankAccount will 
+            incur.
+
+        Returns:
+            float:  Calculated service charges.
+        """
+        if self._date_created > self.TEN_YEARS_AGO:
+            service_charge = self.BASE_SERVICE_CHARGE
+
+        else:
+            service_charge = self.__management_fee + self.BASE_SERVICE_CHARGE
+
+        return service_charge
+        
         
