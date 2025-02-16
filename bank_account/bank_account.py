@@ -3,20 +3,24 @@
 __author__ = "Xavier Balzer"
 __version__= "1.3.2"
 
+from datetime import date
+
 class BankAccount:
     """Represents a bank account within a banking system."""
 
-    def __init__(self, account_number: int, client_number: int, balance: float):
+    def __init__(self, BASE_SERVICE_CHARGE: float, account_number: int, client_number: int, balance: float, date_created: date):
         """Initializes a new instance of the BankAccount class.
 
         Args:
+            BASE_SERVICE_CHARGE(float): A constant value representing
+                base service charge.
             account_number(int): An integer value representing the bank
                 account number
             client_number(int): An integer value representing
                 the client number.
             balance(float): A float value representing the current
                 balance of the bank account.
-
+            date_created(date): The date the bank account was created.
         Raises:
             ValueError: Raised when the account_number or client_number
                 argument values are not an integer type, or when the
@@ -34,10 +38,17 @@ class BankAccount:
 
         except ValueError:
             balance = 0.0
-            
+        
+        # Constant attributes
+        self.BASE_SERVICE_CHARGE = 0.50
+
+        # Private attributes
         self.__account_number = account_number
         self.__client_number = client_number
         self.__balance = balance
+
+        # Protected attributes
+        self._date_created = date_created
 
     @property
     def account_number(self) -> int:
