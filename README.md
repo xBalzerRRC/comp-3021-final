@@ -15,3 +15,7 @@ Assignment #2 - Abstraction, Inheritance and Polymorphism: This assignment will 
 ## Encapsulation
 
 By making use of accessors and mutators for the BankAccount class' attributes, we are able to read and assign values to private attributes without needing direct access to them. For instance, methods such as update_balance, withdraw, and deposit enable us to make changes to the balance class attribute without needing to modify the variable directly.
+
+## Polymorphism
+
+I achieved polymorphism in the BankAccount subclass via the use of the get_service_charges method, which allowed us to calculate the price of a bank account's service charges depending on what kind of bank account was being used, the use of super() with __init__ and __str__ class methods throughout the subclasses also allowed for BankAccount class attributes and string representations to be inherited throughout all the subclasses.
