@@ -1,7 +1,7 @@
 """This module defines the SavingsAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 from datetime import date
 from bank_account.bank_account import BankAccount
@@ -57,8 +57,8 @@ class SavingsAccount(BankAccount):
             balance and account number attributes.
         """
 
-        return super().__str__() + (f"\nMinimum Balance:"
-                                    f"{self.__minimum_balance:,.2f}"
+        return super().__str__() + (f"\nMinimum Balance: "
+                                    f"${self.__minimum_balance:,.2f} "
                                     "Account Type: Savings")
     
 
