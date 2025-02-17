@@ -1,7 +1,7 @@
 """This module defines the SavingsAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 from datetime import date
 from bank_account.bank_account import BankAccount
@@ -38,6 +38,45 @@ class SavingsAccount(BankAccount):
         super().__init__(0.5, account_number, client_number, balance, 
                          date_created)
         
+        try:
+            minimum_balance = float(minimum_balance)
+
+        except ValueError:
+            minimum_balance = 50       
+
         self.SERVICE_CHARGE_PREMIUM = 2.0
-        
+
         self.__minimum_balance = minimum_balance
+
+    def __str__(self):
+        """Returns a string representation of the BankAccount object's
+            balance and account number attributes.
+
+        Returns:
+            str: A string representation of the BankAccount object's 
+            balance and account number attributes.
+        """
+
+        return super().__str__() + (f"\nMinimum Balance:"
+                                    f"{self.__minimum_balance:,.2f}"
+                                    "Account Type: Savings")
+    
+
+    def get_service_charges(self) -> float:
+        """Returns the calculated service charges a BankAccount will 
+            incur.
+
+        Returns:
+            float:  Calculated service charges.
+        """
+
+        if self.balance >= self.__minimum_balance:
+            service_charges = self.BASE_SERVICE_CHARGE
+        
+        else:
+            service_charges = (self.BASE_SERVICE_CHARGE *
+                               self.SERVICE_CHARGE_PREMIUM)
+        
+        return service_charges
+
+    
