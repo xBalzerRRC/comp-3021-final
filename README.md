@@ -12,6 +12,8 @@ Assignment #1 - Classes: This assignment will produce some foundational classes 
 
 Assignment #2 - Abstraction, Inheritance and Polymorphism: This assignment will extend the BankAccount class created in your previous assignment. The BankAccount class will be used as a superclass from which more specific subclasses will be derived. Each subclass will inherit attributes and methods from the superclass, and will incorporate functionality specific to the subclass. Polymorphism will be realized by having each subclass provide their own unique implementation to a superclass method. Unit testing in this assignment will be limited to verifying the expected polymorphic behaviour.
 
+Assignment #3 - Design Patterns: This assignment will address issues associated with the scalability and maintainability of the current service charge calculation functionality. In this assignment the Strategy Pattern will be applied to simplify and add scalability to the service charge functionality. In addition, the Observer Pattern will be introduced. Using the Observer Pattern a client will be notified whenever a large transaction takes place and/or whenever an account balance drops below a minimum value.
+
 ## Encapsulation
 
 By making use of accessors and mutators for the BankAccount class' attributes, we are able to read and assign values to private attributes without needing direct access to them. For instance, methods such as update_balance, withdraw, and deposit enable us to make changes to the balance class attribute without needing to modify the variable directly.
