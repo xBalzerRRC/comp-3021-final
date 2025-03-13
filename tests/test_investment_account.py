@@ -16,7 +16,6 @@ class TestInvestmentAccount(unittest.TestCase):
     """Tests the InvestmentAccountClass."""
 
     def setUp(self) -> None:
-        self.BASE_SERVICE_CHARGE = 0.50
         self.account_number = 1234
         self.client_number = 1
         self.balance = 1000.0
@@ -65,7 +64,7 @@ class TestInvestmentAccount(unittest.TestCase):
 
     def test_get_service_charges_date_created_over_ten_years(self):
         # Arrange
-        self.date_created = date(2015, 1, 1)
+        self.date_created = date(2000, 1, 1)
 
         self.bank_account = InvestmentAccount(
             self.account_number,

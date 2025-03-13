@@ -1,7 +1,7 @@
 """This module defines the InvestmentAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 from datetime import date, timedelta
 from bank_account.bank_account import BankAccount
@@ -25,14 +25,13 @@ class InvestmentAccount(BankAccount):
             management_fee(float): The management fee for an investment
                 account.
 
-
         Raises:
             ValueError: Raised when the account_number or client_number
                 argument values are not an integer type, or when the
                 balance argument value cannot be converted to a float.
         """
 
-        super().__init__(0.5, account_number, client_number, balance, 
+        super().__init__(account_number, client_number, balance, 
                          date_created)
         
         try:
@@ -68,13 +67,12 @@ class InvestmentAccount(BankAccount):
 
         Returns:
             float:  Calculated service charges.
-        """
+        """ 
     
-        if self.TEN_YEARS_AGO > self._date_created:
-            service_charge = self.BASE_SERVICE_CHARGE
+        service_charge = self.BASE_SERVICE_CHARGE
 
-        else:
-            service_charge = self._management_fee + self.BASE_SERVICE_CHARGE
+        if self.TEN_YEARS_AGO < self._date_created:
+            service_charge += self._management_fee
 
         return service_charge
         

@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.4.4"
+__version__= "1.4.5"
 
 from abc import ABC, abstractmethod
 from datetime import datetime, date
@@ -9,8 +9,8 @@ from datetime import datetime, date
 class BankAccount(ABC):
     """Represents a bank account within a banking system."""
 
-    def __init__(self, BASE_SERVICE_CHARGE: float, account_number: int,
-                 client_number: int, balance: float, date_created: date):
+    def __init__(self, account_number: int, 
+                 client_number: int, balance: float, date_created: date): 
         """Initializes a new instance of the BankAccount class.
 
         Args:
@@ -23,6 +23,7 @@ class BankAccount(ABC):
             balance(float): A float value representing the current
                 balance of the bank account.
             date_created(date): The date the bank account was created.
+
         Raises:
             ValueError: Raised when the account_number or client_number
                 argument values are not an integer type, or when the

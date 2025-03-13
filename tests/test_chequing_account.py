@@ -5,7 +5,7 @@ Example:
 """
 
 __author__ = "Xavier Balzer"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import unittest
 from bank_account.bank_account import BankAccount
@@ -16,7 +16,6 @@ class TestChequingAccount(unittest.TestCase):
     """Tests the ChequingAccountClass."""
 
     def setUp(self) -> None:
-        self.BASE_SERVICE_CHARGE = 0.50
         self.account_number = 1234
         self.client_number = 1
         self.balance = 1000.0
