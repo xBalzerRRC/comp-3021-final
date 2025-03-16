@@ -30,7 +30,7 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
         
         service_charges = self.BASE_SERVICE_CHARGE
 
-        if self.balance < self.__minimum_balance:
+        if account.balance < self.__minimum_balance:
             service_charges *= self.SERVICE_CHARGE_PREMIUM
               
         return service_charges
