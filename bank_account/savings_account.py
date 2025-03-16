@@ -46,7 +46,7 @@ class SavingsAccount(BankAccount):
             minimum_balance = 50       
 
         self.__minimum_balance = minimum_balance
-        self.__strategy = MinimumBalanceStrategy
+        self.__strategy = MinimumBalanceStrategy(minimum_balance)
 
     def __str__(self):
         """Returns a string representation of the BankAccount object's
