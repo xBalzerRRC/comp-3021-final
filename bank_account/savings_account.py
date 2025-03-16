@@ -45,8 +45,6 @@ class SavingsAccount(BankAccount):
         except ValueError:
             minimum_balance = 50       
 
-        self.SERVICE_CHARGE_PREMIUM = 2.0
-
         self.__minimum_balance = minimum_balance
         self.__strategy = MinimumBalanceStrategy
 
