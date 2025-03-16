@@ -45,7 +45,7 @@ class InvestmentAccount(BankAccount):
 
         self._management_fee = management_fee
 
-        self.__strategy = ManagementFeeStrategy
+        self.__strategy = ManagementFeeStrategy(date_created, management_fee)
 
     def __str__(self) -> str:
         """Returns the "informal" or nicely printable string 
