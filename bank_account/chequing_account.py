@@ -1,7 +1,7 @@
 """This module defines the ChequingAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.5.2"
+__version__ = "1.5.3"
 
 from datetime import date
 from bank_account.bank_account import BankAccount
@@ -55,7 +55,7 @@ class ChequingAccount(BankAccount):
         # Private attributes
         self.__overdraft_limit = overdraft_limit
         self.__overdraft_rate = overdraft_rate
-        self.__strategy = OverdraftStrategy
+        self.__strategy = OverdraftStrategy(overdraft_limit, overdraft_rate)
 
     def __str__(self) -> str:
         """Returns the "informal" or nicely printable string 
