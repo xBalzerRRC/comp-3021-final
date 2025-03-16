@@ -1,10 +1,11 @@
 """This module defines the InvestmentAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.1.3"
+__version__ = "1.2.3"
 
 from datetime import date, timedelta
 from bank_account.bank_account import BankAccount
+from patterns.strategy.management_fee_strategy import ManagementFeeStrategy
 
 class InvestmentAccount(BankAccount):
     """Represents a investment account within a banking system."""
@@ -44,6 +45,8 @@ class InvestmentAccount(BankAccount):
 
         self._management_fee = management_fee
 
+        self.__strategy = ManagementFeeStrategy
+
     def __str__(self) -> str:
         """Returns the "informal" or nicely printable string 
         representation of the object.
@@ -69,11 +72,9 @@ class InvestmentAccount(BankAccount):
             float:  Calculated service charges.
         """ 
     
-        service_charge = self.BASE_SERVICE_CHARGE
+        service_charges = self.__strategy.calculate_service_charges(self)
 
-        if self.TEN_YEARS_AGO < self._date_created:
-            service_charge += self._management_fee
-
-        return service_charge
+        return service_charges
+e
         
         
