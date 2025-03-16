@@ -1,7 +1,7 @@
 """This module defines the InvestmentAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 
 from datetime import date, timedelta
 from bank_account.bank_account import BankAccount
@@ -75,6 +75,6 @@ class InvestmentAccount(BankAccount):
         service_charges = self.__strategy.calculate_service_charges(self)
 
         return service_charges
-e
+
         
         
