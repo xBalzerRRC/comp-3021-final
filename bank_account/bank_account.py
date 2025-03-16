@@ -1,7 +1,7 @@
 """This module defines the BankAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__= "1.4.5"
+__version__= "1.4.6"
 
 from abc import ABC, abstractmethod
 from datetime import datetime, date
@@ -44,9 +44,6 @@ class BankAccount(ABC):
 
         except ValueError:
             balance = 0.0
-
-        # Constant attributes
-        self.BASE_SERVICE_CHARGE = 0.50
 
         # Private attributes
         self.__account_number = account_number
