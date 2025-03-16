@@ -33,8 +33,8 @@ class OverdraftStrategy(ServiceChargeStrategy):
         
         service_charges = self.BASE_SERVICE_CHARGE
         
-        if self.balance < self.__overdraft_limit:
-            service_charges +=  ((self.__overdraft_limit - self.balance) * 
+        if account.balance < self.__overdraft_limit:
+            service_charges +=  ((self.__overdraft_limit - account.balance) * 
                                  self.__overdraft_rate)
         
         return service_charges
