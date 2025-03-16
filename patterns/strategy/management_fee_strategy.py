@@ -36,8 +36,8 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
 
         service_charge = self.BASE_SERVICE_CHARGE
 
-        if self.TEN_YEARS_AGO < self._date_created:
-            service_charge += self._management_fee
+        if self.TEN_YEARS_AGO < self.__date_created:
+            service_charge += self.__management_fee
 
         return service_charge
                 
