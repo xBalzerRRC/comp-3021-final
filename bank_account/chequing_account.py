@@ -1,10 +1,11 @@
 """This module defines the ChequingAccount class."""
 
 __author__ = "Xavier Balzer"
-__version__ = "1.4.2"
+__version__ = "1.5.2"
 
 from datetime import date
 from bank_account.bank_account import BankAccount
+from patterns.strategy.overdraft_strategy import OverdraftStrategy
 
 class ChequingAccount(BankAccount):
     """Represents a chequing account within a banking system."""
@@ -54,6 +55,7 @@ class ChequingAccount(BankAccount):
         # Private attributes
         self.__overdraft_limit = overdraft_limit
         self.__overdraft_rate = overdraft_rate
+        self.__strategy = OverdraftStrategy
 
     def __str__(self) -> str:
         """Returns the "informal" or nicely printable string 
@@ -76,10 +78,6 @@ class ChequingAccount(BankAccount):
             float:  Calculated service charges.
         """      
 
-        service_charges = self.BASE_SERVICE_CHARGE
-        
-        if self.balance < self.__overdraft_limit:
-            service_charges +=  ((self.__overdraft_limit - self.balance) * 
-                                 self.__overdraft_rate)
-        
+        service_charges = self.__strategy.calculate_service_charges(self)
+
         return service_charges
