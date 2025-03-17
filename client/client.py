@@ -4,6 +4,9 @@ __author__ = "Xavier Balzer"
 __version__= "1.3.3"
 
 from email_validator import validate_email, EmailNotValidError
+from patterns.observer.observer import Observer
+from utility.file_utils import simulate_send_email
+from datetime import datetime
 
 class Client:
     """Represents a client's information within a banking system."""
@@ -107,3 +110,10 @@ class Client:
         )
 
         return string_representation
+    
+    def update(self, message: str) -> None:
+        """Sends a simulated email."""
+        simulate_send_email(email_address, 
+                            f"ALERT: Unusual Activity: {datetime.today}", 
+                            f"Notification for {self.client_number}: "
+                            f"{self.first_name} {self.last_name}: {message}")
