@@ -6,6 +6,7 @@ __version__= "1.4.6"
 from abc import ABC, abstractmethod
 from datetime import datetime, date
 from patterns.observer.subject import Subject
+from patterns.observer.observer import Observer, update
 
 class BankAccount(Subject, ABC):
     """Represents a bank account within a banking system."""
@@ -100,6 +101,15 @@ class BankAccount(Subject, ABC):
         if isinstance(amount, float):
             self.__balance += amount
 
+        if self.__balance < self.LOW_BALANCE_LEVEL:
+            self.notify(f"Low balance warning ${self.__balance:,.2f}: "
+                        f"on account {self.__account_number}.")
+
+        if amount > self.LARGE_TRANSACTION_THRESHOLD:
+            self.notify(f"Large transaction {amount}: "
+                        f"on account {self.__account_number}.")
+
+
     def deposit(self, amount: float):
         """Deposits amount to balance.
         
@@ -169,3 +179,21 @@ class BankAccount(Subject, ABC):
         """      
         pass
 
+    def attach(self, observer: Observer) -> None:
+        """Adds a new observer to the Subject's list of observers."""
+
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        """Removes an observer from the Subject's list of observers."""
+
+        if observer in self._observers:
+            self._observers.remove(observer)
+
+    def notify(self, message: str) -> None:
+        """Alerts all registered observers of a state change."""
+        for observer in self._observers:
+            Observer.update(observer, message)
+
+
+    
