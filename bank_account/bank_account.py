@@ -5,8 +5,9 @@ __version__= "1.4.6"
 
 from abc import ABC, abstractmethod
 from datetime import datetime, date
+from patterns.observer.subject import Subject
 
-class BankAccount(ABC):
+class BankAccount(Subject, ABC):
     """Represents a bank account within a banking system."""
 
     def __init__(self, account_number: int, 
@@ -44,6 +45,10 @@ class BankAccount(ABC):
 
         except ValueError:
             balance = 0.0
+        
+        # Constants
+        self.LARGE_TRANSACTION_THRESHOLD = 9999.99
+        self.LOW_BALANCE_LEVEL = 50.0
 
         # Private attributes
         self.__account_number = account_number
@@ -52,6 +57,8 @@ class BankAccount(ABC):
 
         # Protected attributes
         self._date_created = date_created
+
+        super().__init__()
 
     @property
     def account_number(self) -> int:
@@ -161,3 +168,4 @@ class BankAccount(ABC):
             float:  Calculated service charges.
         """      
         pass
+
