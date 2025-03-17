@@ -8,7 +8,7 @@ from patterns.observer.observer import Observer
 from utility.file_utils import simulate_send_email
 from datetime import datetime
 
-class Client:
+class Client(Observer):
     """Represents a client's information within a banking system."""
 
     def __init__(self, client_number: int, first_name: str, 
