@@ -113,7 +113,7 @@ class Client(Observer):
     
     def update(self, message: str) -> None:
         """Sends a simulated email."""
-        simulate_send_email(email_address, 
+        simulate_send_email(self.email_address, 
                             f"ALERT: Unusual Activity: {datetime.today}", 
                             f"Notification for {self.client_number}: "
                             f"{self.first_name} {self.last_name}: {message}")
