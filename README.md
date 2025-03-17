@@ -21,3 +21,7 @@ By making use of accessors and mutators for the BankAccount class' attributes, w
 ## Polymorphism
 
 I achieved polymorphism in the BankAccount subclass via the use of the get_service_charges method, which allowed us to calculate the price of a bank account's service charges depending on what kind of bank account was being used, the use of super() with __init__ and __str__ class methods throughout the subclasses also allowed for BankAccount class attributes and string representations to be inherited throughout all the subclasses.
+
+## Strategy Pattern
+
+In this file the Strategy Pattern is employed to avoid the use of repetitive code when processing service charges across different banking account modules. Calling a strategy pattern that uses a method instead of invoking the method itself allows us to reuse the same code across multiple different classes without needing to write it individually for each one.
