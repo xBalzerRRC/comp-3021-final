@@ -6,7 +6,7 @@ __version__= "1.4.6"
 from abc import ABC, abstractmethod
 from datetime import datetime, date
 from patterns.observer.subject import Subject
-from patterns.observer.observer import Observer, update
+from patterns.observer.observer import Observer
 
 class BankAccount(Subject, ABC):
     """Represents a bank account within a banking system."""

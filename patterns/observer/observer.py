@@ -6,10 +6,11 @@ __version__ = "1.0.0"
 from abc import ABC, abstractmethod
 
 class Observer(ABC):
-    """Used to maintain all possible ways that 
-    service charges can be applied to accounts.
+    """Superclass used to define the interface for all concrete
+    observers that need to be notified of changes in the subject.
     """
 
     @abstractmethod
     def update(self, message: str) -> None:
+        """Notifies observers when there are changes in the subject"""
         pass
