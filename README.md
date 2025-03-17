@@ -25,3 +25,7 @@ I achieved polymorphism in the BankAccount subclass via the use of the get_servi
 ## Strategy Pattern
 
 In this file the Strategy Pattern is employed to avoid the use of repetitive code when processing service charges across different banking account modules. Calling a strategy pattern that uses a method instead of invoking the method itself allows us to reuse the same code across multiple different classes without needing to write it individually for each one.
+
+## Observer Pattern
+
+The observer pattern was used in this application to notify clients of any large transactions made on their account or when their account balance falls below a specific threshold.
