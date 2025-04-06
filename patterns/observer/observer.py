@@ -12,5 +12,10 @@ class Observer(ABC):
 
     @abstractmethod
     def update(self, message: str) -> None:
-        """Notifies observers when there are changes in the subject"""
+        """Notifies the observer of a state change in the subject.
+
+        Args:
+            message (str): The information or notification regarding the state change.
+        """
+
         pass

@@ -15,9 +15,6 @@ class SavingsAccount(BankAccount):
         """Initializes a new instance of the SavingsAccount class.
 
         Args:
-            SERVICE_CHARGE_PREMIUM(float): A constant value representing
-                additional charges placed when a savings account goes
-                below the minimum_balance.
             account_number(int): An integer value representing the
                 savings account number
             client_number(int): An integer value representing

@@ -16,8 +16,6 @@ class BankAccount(Subject, ABC):
         """Initializes a new instance of the BankAccount class.
 
         Args:
-            BASE_SERVICE_CHARGE(float): A constant value representing
-                base service charge.
             account_number(int): An integer value representing the bank
                 account number
             client_number(int): An integer value representing
@@ -102,12 +100,14 @@ class BankAccount(Subject, ABC):
             self.__balance += amount
 
         if self.__balance < self.LOW_BALANCE_LEVEL:
-            self.notify(f"Low balance warning ${self.__balance:,.2f}: "
-                        f"on account {self.__account_number}.")
+            low_balance_notif = (f"Low balance warning ${self.__balance:,.2f}: "
+                                 f"on account {self.__account_number}.")
+            self.notify(low_balance_notif)
 
         if amount > self.LARGE_TRANSACTION_THRESHOLD:
-            self.notify(f"Large transaction {amount}: "
-                        f"on account {self.__account_number}.")
+            large_transaction_notif = (f"Large transaction {amount}: "
+                                       f"on account {self.__account_number}.")
+            self.notify(large_transaction_notif)
 
 
     def deposit(self, amount: float):
@@ -176,24 +176,45 @@ class BankAccount(Subject, ABC):
 
         Returns:
             float:  Calculated service charges.
-        """      
+        """
+
         pass
 
     def attach(self, observer: Observer) -> None:
-        """Adds a new observer to the Subject's list of observers."""
+        """Adds a new observer to the subject's list of observers.
+
+        This method appends the provided observer to the internal list,
+        allowing it to receive notifications of state changes.
+
+        Args:
+            observer (Observer): The observer instance that should be 
+            notified of state changes.
+        """
 
         self._observers.append(observer)
 
     def detach(self, observer: Observer) -> None:
-        """Removes an observer from the Subject's list of observers."""
+        """Removes an observer from the subject's list of observers.
+
+        If the observer is registered, it is removed from the internal list.
+        If the observer is not in the list, no action is taken.
+
+        Args:
+            observer (Observer): The observer instance to remove.
+        """
 
         if observer in self._observers:
             self._observers.remove(observer)
 
     def notify(self, message: str) -> None:
-        """Alerts all registered observers of a state change."""
+        """Alerts all registered observers of a state change by sending a message.
+
+        This method iterates through all observers in the internal list
+        and calls their update method with the provided message.
+
+        Args:
+            message (str): The message to be sent to all observers.
+        """
+
         for observer in self._observers:
-            Observer.update(observer, message)
-
-
-    
+            observer.update(message)

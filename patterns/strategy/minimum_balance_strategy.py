@@ -7,8 +7,8 @@ from bank_account.bank_account import BankAccount
 from patterns.strategy.service_charge_strategy import ServiceChargeStrategy
 
 class MinimumBalanceStrategy(ServiceChargeStrategy):
-    """Represents a service charge strategy that 
-    """
+    """Represents a service charge strategy within a banking system."""
+    
     def __init__(self, minimum_balance: float):
         """Initializes a new instance of the MinimumBalanceStrategy subclass.
         
