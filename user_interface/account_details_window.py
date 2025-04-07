@@ -12,6 +12,9 @@ class AccountDetailsWindow(DetailsWindow):
     """
     A class used to display account details and perform bank account transactions.
     """
+
+    balance_updated = Signal(BankAccount)
+
     def __init__(self, account: BankAccount) -> None:
         """
         Initializes a new instance of the ExtendedAccountDetails window.
@@ -59,6 +62,8 @@ class AccountDetailsWindow(DetailsWindow):
 
             self.balance_label.setText(f"${self.account.balance:,.2f}")
 
+            self.balance_updated.emit(self.account)
+
             self.transaction_amount_edit.setText("")
             self.transaction_amount_edit.setFocus()
 
@@ -72,5 +77,5 @@ class AccountDetailsWindow(DetailsWindow):
             self.transaction_amount_edit.setFocus()
 
 
-        def on_exit(self):
-            self.close()
+    def on_exit(self):
+        self.close()

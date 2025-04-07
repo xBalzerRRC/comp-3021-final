@@ -90,7 +90,29 @@ class ClientLookupWindow(LookupWindow):
 
         account = self.accounts[account_number]
         details_window = AccountDetailsWindow(account)
+        details_window.balance_updated.connect(self.update_data)
         details_window.exec()
 
-    def update_data(account: BankAccount):
-        pass
+    @Slot(BankAccount)
+    def update_data(self, account: BankAccount):
+        for row in range(self.account_table.rowCount()):
+            item = self.account_table.item(row, 0)
+
+            if not item:
+                continue
+
+            try:
+                table_account_number = int(item.text())
+            except ValueError:
+                continue
+
+            if table_account_number == account.account_number:
+                balance_item = QTableWidgetItem(f"${account.balance:,.2f}")
+                balance_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                self.account_table.setItem(row, 1, balance_item)
+
+                self.accounts[account.account_number] = account
+
+                update_data(account)
+
+                break
