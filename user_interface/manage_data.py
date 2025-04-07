@@ -13,7 +13,7 @@ from bank_account.bank_account import BankAccount
 from bank_account.chequing_account import ChequingAccount
 from bank_account.investment_account import InvestmentAccount
 from bank_account.savings_account import SavingsAccount
-from datetime import datetime
+from datetime import datetime, date
 import logging
 
 # *******************************************************************************
@@ -66,25 +66,62 @@ def load_data()->tuple[dict,dict]:
     # READ CLIENT DATA 
     with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        try: 
-            client_number = int(row["client_number"])
-            first_name = row["first_name"]
-            last_name = row["last_name"]
-            email_address = row["email_address"]
-            
-            client = Client(client_number, first_name, last_name,
-                             email_address)
-            client_listing[client_number] = client
-            
-        except Exception as e:
-            logging.error(f"Unable to create client: {e}")
+        for row in reader:
+            try: 
+                client_number = int(row["client_number"])
+                first_name = row["first_name"]
+                last_name = row["last_name"]
+                email_address = row["email_address"]
+                
+                client = Client(client_number, first_name, last_name,
+                                 email_address)
+                
+                client_listing.update({client_number: client})
+                
+            except Exception as e:
+                logging.error(f"Unable to create client: {e}")
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  
+        for row in reader:
+            try:
+                account_number = int(row["account_number"])
+                client_number = int(row["client_number"])
+                account_type = row["account_type"]
+                balance = float(row["balance"])
+                date_created = date(row["date_created"])
+                
+                if account_type == "ChequingAccount":
+                    overdraft_limit = float(row["overdraft_limit"])
+                    overdraft_rate = float(row["overdraft_limit"])
+                    account = ChequingAccount(account_number, client_number,
+                                              balance, date_created, overdraft_limit,
+                                              overdraft_rate)
+                elif account_type == "SavingsAccount":
+                    minimum_balance = float(row["minimum_balance"])
+                    account = SavingsAccount(account_number, client_number, balance,
+                                             date_created, minimum_balance)
+                elif account_type == "InvestmentAccount":
+                    management_fee = float(row["management_fee"])
+                    account = InvestmentAccount(account_number, client_number, 
+                                                balance, date_created, management_fee)
+                else:
+                    raise ValueError("Not a valid account type.")
+
+                if client_number not in client_listing:
+                    logging.error(
+                        f"Bank Account: {account_number} contains invalid Client Number: {client_number}"
+                    )
+                else:
+                    accounts[account_number] = account
+                    accounts.update({account_number: client})
+
+            except Exception as e:
+                logging.error(f"Unable to create bank account: {e}")
 
     # RETURN STATEMENT
-    
+    return client_listing, accounts
 
 
 def update_data(updated_account: BankAccount) -> None:
