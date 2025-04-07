@@ -3,7 +3,7 @@ __version__ = "1.0.0"
 __credits__ = ""
 
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Slot
 
 from ui_superclasses.lookup_window import LookupWindow
 from user_interface.account_details_window import AccountDetailsWindow
@@ -66,10 +66,31 @@ class ClientLookupWindow(LookupWindow):
         self.account_table.resizeColumnsToContents() 
     
     def on_text_changed(self):
-        pass
+        self.account_table.setRowCount(0)
 
-    def on_select_account(row: int, column: int):
-        pass
+    @Slot(int, int)
+    def on_select_account(self, row: int, column: int) -> None:
+        account_number_item = self.account_table.item(row, 0)
+
+        if not account_number_item or not account_number_item.text().strip():
+            QMessageBox.information(self, "Invalid Selection", "Please select a valid record.")
+            return
+
+        account_number_str = account_number_item.text().strip()
+
+        try:
+            account_number = int(account_number_str)
+        except ValueError:
+            QMessageBox.information(self, "Invalid Selection", "Please select a valid record.")
+            return
+
+        if account_number not in self.accounts:
+            QMessageBox.information(self, "No Bank Account", "Bank Account selected does not exist.")
+            return
+
+        account = self.accounts[account_number]
+        details_window = AccountDetailsWindow(account)
+        details_window.exec()
 
     def update_data(account: BankAccount):
         pass
