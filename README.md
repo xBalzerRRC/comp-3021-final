@@ -29,3 +29,7 @@ In this file the Strategy Pattern is employed to avoid the use of repetitive cod
 ## Observer Pattern
 
 The observer pattern was used in this application to notify clients of any large transactions made on their account or when their account balance falls below a specific threshold.
+
+## Event-Driven Programming Paradigm
+
+This application demonstrates the Event-Driven Programming Paradigm through the use of signals and slots, user interface events, and dynamic updates based on user actions.
