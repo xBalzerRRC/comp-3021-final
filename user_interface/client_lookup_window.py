@@ -12,5 +12,64 @@ from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
 
 class ClientLookupWindow(LookupWindow):
-    pass
-        
+    def __init__(self):
+        super().__init__()
+
+        self.client_listing, self.accounts = load_data()
+
+        self.lookup_button.clicked.connect(self.on_lookup_client)
+        self.client_number_edit.textChanged.connect(self.on_text_changed)
+        self.account_table.cellClicked.connect(self.on_select_account)
+
+    def on_lookup_client(self):
+        try:
+            client_number_str = self.client_number_edit.text().strip()
+            client_number = int(client_number_str)
+        except ValueError:
+            QMessageBox.information(self, "Input Error", 
+                                    "The client number must be a numeric value.")
+            self.reset_display()
+            return
+
+        if client_number not in self.client_listing:
+            QMessageBox.information(self, "Not Found", 
+                                    f"Client number: {client_number} not found.")
+            self.reset_display()
+            return
+
+        client = self.client_listing[client_number]
+
+        self.client_info_label.setText(f"Client Name: {client.first_name} {client.last_name}")
+
+        for account in self.accounts.values():
+            if account.client_number == client_number:
+                row_position = self.account_table.rowCount()
+                self.account_table.insertRow(row_position)
+
+                account_number_item = QTableWidgetItem(str(account.account_number))
+                account_number_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+
+                balance_item = QTableWidgetItem(f"${account.balance:,.2f}")
+                balance_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                
+                date_created_item = QTableWidgetItem(str(account._date_created))
+                date_created_item.setTextAlignment(Qt.AlignCenter)
+
+                account_type_item = QTableWidgetItem(account.__class__.__name__)
+                account_type_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+                self.account_table.setItem(row_position, 0, account_number_item)
+                self.account_table.setItem(row_position, 1, balance_item)
+                self.account_table.setItem(row_position, 2, date_created_item)
+                self.account_table.setItem(row_position, 3, account_type_item)
+
+        self.account_table.resizeColumnsToContents() 
+    
+    def on_text_changed(self):
+        pass
+
+    def on_select_account(row: int, column: int):
+        pass
+
+    def update_data(account: BankAccount):
+        pass
