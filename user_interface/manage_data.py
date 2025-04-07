@@ -8,6 +8,11 @@ import sys
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
+from client.client import Client
+from bank_account.bank_account import BankAccount
+from bank_account.chequing_account import ChequingAccount
+from bank_account.investment_account import InvestmentAccount
+from bank_account.savings_account import SavingsAccount
 from datetime import datetime
 import logging
 
@@ -61,7 +66,18 @@ def load_data()->tuple[dict,dict]:
     # READ CLIENT DATA 
     with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        
+        try: 
+            client_number = int(row["client_number"])
+            first_name = row["first_name"]
+            last_name = row["last_name"]
+            email_address = row["email_address"]
+            
+            client = Client(client_number, first_name, last_name,
+                             email_address)
+            client_listing[client_number] = client
+            
+        except Exception as e:
+            logging.error(f"Unable to create client: {e}")
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
