@@ -9,8 +9,8 @@ from bank_account.bank_account import BankAccount
 import copy
 
 class AccountDetailsWindow(DetailsWindow):
-    """
-    A class used to display account details and perform bank account transactions.
+    """Represents a GUI window for viewing and performing transactions
+    on a single bank account.
     """
 
     balance_updated = Signal(BankAccount)
@@ -23,6 +23,7 @@ class AccountDetailsWindow(DetailsWindow):
         Returns:
             None
         """
+        
         super().__init__()
 
         if isinstance(account, BankAccount):
@@ -40,6 +41,12 @@ class AccountDetailsWindow(DetailsWindow):
 
     
     def on_apply_transaction(self):
+        """
+        Handles deposit or withdrawal transactions based on user input.
+        Validates input, updates the balance, and emits a signal with
+        the updated account.
+        """
+
         try:
             amount_str = self.transaction_amount_edit.text().strip()
             amount = float(amount_str)
@@ -78,4 +85,6 @@ class AccountDetailsWindow(DetailsWindow):
 
 
     def on_exit(self):
+        """Closes the account details window."""
+
         self.close()

@@ -12,6 +12,11 @@ from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
 
 class ClientLookupWindow(LookupWindow):
+    """Represents a GUI window that allows users to look up clients by
+    their client number and displays client information and associated 
+    bank accounts in a table.
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -22,6 +27,11 @@ class ClientLookupWindow(LookupWindow):
         self.account_table.cellClicked.connect(self.on_select_account)
 
     def on_lookup_client(self):
+        """Handles the lookup process for a client using the client
+        number entered and displays client information and populates the
+        account table with associated accounts if the client is found.
+        """
+        
         try:
             client_number_str = self.client_number_edit.text().strip()
             client_number = int(client_number_str)
@@ -66,10 +76,23 @@ class ClientLookupWindow(LookupWindow):
         self.account_table.resizeColumnsToContents() 
     
     def on_text_changed(self):
+        """Clears the account table when the client number text is
+        modified.
+        """
+
         self.account_table.setRowCount(0)
 
     @Slot(int, int)
     def on_select_account(self, row: int, column: int) -> None:
+        """
+        Opens a detailed account window when a valid row is selected
+        from the account table.
+
+        Args:
+            row (int): The row of the clicked cell.
+            column (int): The column of the clicked cell.
+        """
+
         account_number_item = self.account_table.item(row, 0)
 
         if not account_number_item or not account_number_item.text().strip():
@@ -95,6 +118,13 @@ class ClientLookupWindow(LookupWindow):
 
     @Slot(BankAccount)
     def update_data(self, account: BankAccount):
+        """Updates the account's balance in the table and writes the 
+        updated data to storage.
+
+        Args:
+            account (BankAccount): The updated bank account instance.
+        """
+        
         for row in range(self.account_table.rowCount()):
             item = self.account_table.item(row, 0)
 
