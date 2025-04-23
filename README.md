@@ -14,6 +14,10 @@ Assignment #2 - Abstraction, Inheritance and Polymorphism: This assignment will 
 
 Assignment #3 - Design Patterns: This assignment will address issues associated with the scalability and maintainability of the current service charge calculation functionality. In this assignment the Strategy Pattern will be applied to simplify and add scalability to the service charge functionality. In addition, the Observer Pattern will be introduced. Using the Observer Pattern a client will be notified whenever a large transaction takes place and/or whenever an account balance drops below a minimum value.
 
+Assignment #4 - Programming Paradigms: This assignment will incorporate a Graphical User Interface (GUI) into the PiXELL-River Financial banking system. The end product will include a lookup window from which users can view existing Client and corresponding Bank Account data. The user can then select a Bank Account and perform deposit and withdraw transactions against the selected Bank Account. PySide6 will be used to produce the windows and the design of these windows will be given so that students can focus on implementing the Event Driven Programming Paradigm into their existing set of classes.
+
+Assignment #5 - Algorithms, Help Files and Distribution: This assignment will incorporate a filtering algorithm into the GUI application such that the user may filter the bank account listing based on user-defined criteria. Additionally, the project will be wrapped up by generating html help files for each of the classes based on the docstrings coded throughout the semester. As well, the project will be packaged up into a user-friendly installer such that it may be distributed to users.
+
 ## Encapsulation
 
 By making use of accessors and mutators for the BankAccount class' attributes, we are able to read and assign values to private attributes without needing direct access to them. For instance, methods such as update_balance, withdraw, and deposit enable us to make changes to the balance class attribute without needing to modify the variable directly.
