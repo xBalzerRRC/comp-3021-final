@@ -7,6 +7,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, date
 from patterns.observer.subject import Subject
 from patterns.observer.observer import Observer
+import pickle
 
 class BankAccount(Subject, ABC):
     """Represents a bank account within a banking system."""
@@ -218,3 +219,6 @@ class BankAccount(Subject, ABC):
 
         for observer in self._observers:
             observer.update(message)
+
+    def load_account_data(self, serialized_data: bytes) -> dict:
+        return pickle.loads(serialized_data)

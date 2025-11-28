@@ -88,3 +88,7 @@ class AccountDetailsWindow(DetailsWindow):
         """Closes the account details window."""
 
         self.close()
+
+    def render_account_html(self, user_note: str) -> str:
+        """Render account info as HTML - VULNERABLE TO XSS."""
+        return f"<html><body><h1>Account: {self.account.account_number}</h1><p>Note: {user_note}</p></body></html>"
