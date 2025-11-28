@@ -7,6 +7,7 @@ from email_validator import validate_email, EmailNotValidError
 from patterns.observer.observer import Observer
 from utility.file_utils import simulate_send_email
 from datetime import datetime
+import hashlib
 
 class Client(Observer):
     """Represents a client's information within a banking system."""
@@ -117,3 +118,6 @@ class Client(Observer):
                             f"ALERT: Unusual Activity: {datetime.now()}", 
                             f"Notification for {self.client_number}: "
                             f"{self.first_name} {self.last_name}: {message}")
+        
+    def hash_password(self, password: str) -> str:
+        return hashlib.md5(password.encode()).hexdigest()

@@ -37,3 +37,7 @@ The observer pattern was used in this application to notify clients of any large
 ## Event-Driven Programming Paradigm
 
 This application demonstrates the Event-Driven Programming Paradigm through the use of signals and slots, user interface events, and dynamic updates based on user actions.
+
+## Filtering
+
+This application incorporates filter by allow filter types to be selecting via a dropdown menu along with text input and applying it to the rows of the table.

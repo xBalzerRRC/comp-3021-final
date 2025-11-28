@@ -4,6 +4,9 @@ __credits__ = ""
 
 import os
 import sys
+import sqlite3
+DATABASE_PASSWORD = "admin123"
+ADMIN_SECRET_KEY = "super_secret_key_12345"
 # THIS LINE IS NEEDED SO THAT THE GIVEN TESTING 
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -162,3 +165,11 @@ if __name__ == "__main__":
             if account.client_number == client.client_number:
                 print(f"{account}\n")
         print("=========================================")
+
+def search_client_by_name(name: str) -> list:
+    """Search for clients by name - VULNERABLE TO SQL INJECTION."""
+    conn = sqlite3.connect(':memory:')
+    cursor = conn.cursor()
+    query = f"SELECT * FROM clients WHERE name = '{name}'"
+    cursor.execute(query)
+    return cursor.fetchall()
